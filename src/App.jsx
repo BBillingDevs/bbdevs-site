@@ -43,6 +43,7 @@ import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
+import ReCAPTCHA from "react-google-recaptcha";
 
 // Extend Chakra UI theme to use Poppins font
 const theme = extendTheme({
@@ -60,8 +61,19 @@ function App() {
     message: "",
   });
 
+  const [recaptchaToken, setRecaptchaToken] = useState(null); // Track reCAPTCHA token state
+  const [isSubmitting, setIsSubmitting] = useState(false); // Handle form submission state
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!recaptchaToken) {
+      alert("Please verify that you are not a robot.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
     emailjs
       .sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID, // Using env variables
@@ -78,8 +90,16 @@ function App() {
         (error) => {
           alert("Failed to send the message, please try again.");
         },
-      );
-    e.target.reset();
+      )
+      .finally(() => {
+        setIsSubmitting(false);
+        setRecaptchaToken(null); // Reset reCAPTCHA after form submission
+        e.target.reset(); // Reset form fields
+      });
+  };
+
+  const handleRecaptchaChange = (token) => {
+    setRecaptchaToken(token); // Update reCAPTCHA token state
   };
 
   const handleChange = (e) => {
@@ -428,7 +448,7 @@ function App() {
         {/* Contact Us Section */}
         <Box as="section" id="contact" py={10}>
           <Container maxW="container.lg">
-            <Heading as="h2" color="teal.700" textAlign="center">
+            <Heading as="h2" color="teal.700" textAlign="center" mb={6}>
               Contact Us
             </Heading>
             <form onSubmit={handleSubmit}>
@@ -448,7 +468,19 @@ function App() {
                   <Textarea name="message" onChange={handleChange} />
                 </FormControl>
 
-                <Button type="submit" colorScheme="teal" size="md">
+                {/* reCAPTCHA Component */}
+                <ReCAPTCHA
+                  sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} // Your reCAPTCHA site key
+                  onChange={handleRecaptchaChange}
+                />
+
+                <Button
+                  type="submit"
+                  colorScheme="teal"
+                  size="md"
+                  isDisabled={!recaptchaToken || isSubmitting} // Disable if no token or form is submitting
+                  isLoading={isSubmitting} // Show loading state when submitting
+                >
                   Send Message
                 </Button>
               </VStack>
