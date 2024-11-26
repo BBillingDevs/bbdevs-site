@@ -31,7 +31,7 @@ import bbdevsLogo from "./assets/logo.png";
 import { SiFirebase, SiFlutter, SiVite, SiWordpress } from "react-icons/si";
 import Slider from "react-slick";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import emailjs from "emailjs-com";
+import emailjs from '@emailjs/browser';
 import zimgin from "./assets/zimgin.png";
 import cranesafaris from "./assets/cranesafaris.png";
 import thf from "./assets/thf.png";
