@@ -6,7 +6,7 @@ import {ChakraProvider, extendTheme} from "@chakra-ui/react";
 import Home from "./pages/Home"; // Your main landing page
 import Terms from "./pages/Terms"; // The new Terms component
 import Privacy from "./pages/Privacy"; // The new Privacy component
-import Eula from "./pages/Eula"; // The new EULA component
+import Eula from "./pages/Eula.jsx"; // The new EULA component
 
 const theme = extendTheme({
     fonts: {
