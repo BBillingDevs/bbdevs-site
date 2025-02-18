@@ -1,41 +1,36 @@
-// Home.jsx
-import { useState } from "react";
+import {useState} from "react";
 import {
     Box,
-    Heading,
-    Text,
     Button,
-    Input,
-    Textarea,
+    ChakraProvider,
+    Collapse,
+    Container,
+    extendTheme,
+    Flex,
     FormControl,
     FormLabel,
+    Heading,
     HStack,
-    Container,
-    useDisclosure,
+    Icon,
     IconButton,
     Image,
-    Collapse,
+    Input,
+    Text,
+    Textarea,
+    useDisclosure,
     VStack,
-    Icon,
-    Flex,
 } from "@chakra-ui/react";
-import {
-    FaMobileAlt,
-    FaApple,
-    FaAndroid,
-    FaReact,
-    FaGlobe,
-} from "react-icons/fa";
+import {FaAndroid, FaApple, FaGlobe, FaMobileAlt, FaReact,} from "react-icons/fa";
 import {ReactTyped} from "react-typed";
-import bbdevsLogo from "./assets/logo.png";
-import { SiFirebase, SiFlutter, SiVite, SiWordpress } from "react-icons/si";
+import bbdevsLogo from "../assets/logo.png";
+import {SiFirebase, SiFlutter, SiVite, SiWordpress} from "react-icons/si";
 import Slider from "react-slick";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import emailjs from '@emailjs/browser';
-import zimgin from "./assets/zimgin.png";
-import cranesafaris from "./assets/cranesafaris.png";
-import thf from "./assets/thf.png";
-import ruzawi from "./assets/ruzawi.png";
+import {CloseIcon, HamburgerIcon} from "@chakra-ui/icons";
+import emailjs from "emailjs-com";
+import zimgin from "../assets/zimgin.png";
+import cranesafaris from "../assets/cranesafaris.png";
+import thf from "../assets/thf.png";
+import ruzawi from "../assets/ruzawi.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@fontsource/poppins/400.css";
@@ -44,8 +39,16 @@ import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import ReCAPTCHA from "react-google-recaptcha";
 
+// Extend Chakra UI theme to use Poppins font
+const theme = extendTheme({
+    fonts: {
+        heading: "Poppins, sans-serif", // Set for headings
+        body: "Poppins, sans-serif", // Set for body text
+    },
+});
+
 function Home() {
-    const { isOpen, onToggle } = useDisclosure();
+    const {isOpen, onToggle} = useDisclosure();
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -94,8 +97,8 @@ function Home() {
     };
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        const {name, value} = e.target;
+        setFormData({...formData, [name]: value});
     };
 
     const sliderSettings = {
@@ -124,15 +127,16 @@ function Home() {
     };
 
     return (
-        <>
+        <ChakraProvider theme={theme}>
             {/* Navigation Bar */}
+
             <Box as="nav" bg="teal.900" p={4} w="100vw">
                 <VStack justifyContent="space-between" alignItems="center">
                     {/* Hamburger Icon (Visible only on mobile) */}
                     <IconButton
                         aria-label="Open Menu"
-                        icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-                        display={{ base: "block", md: "none" }}
+                        icon={isOpen ? <CloseIcon/> : <HamburgerIcon/>}
+                        display={{base: "block", md: "none"}}
                         onClick={onToggle}
                         color="gray.100" // Better contrast for the icon
                     />
@@ -140,7 +144,7 @@ function Home() {
                     <HStack
                         spacing={14}
                         alignItems="center"
-                        display={{ base: "none", md: "flex" }}
+                        display={{base: "none", md: "flex"}}
                     >
                         <Button as="a" href="#home" variant="link" color="gray.100">
                             Home
@@ -205,7 +209,7 @@ function Home() {
                     />
                     {/* Your content here */}
                     <Flex
-                        direction={{ base: "column", md: "row" }} // Column on mobile, row on larger screens
+                        direction={{base: "column", md: "row"}} // Column on mobile, row on larger screens
                         align="center"
                         justify="space-between"
                         width="100%"
@@ -214,14 +218,14 @@ function Home() {
                         {/* Logo on the Left */}
                         <Box
                             flex="1"
-                            mb={{ base: 8, md: 0 }}
-                            textAlign={{ base: "center", md: "left" }}
+                            mb={{base: 8, md: 0}}
+                            textAlign={{base: "center", md: "left"}}
                             position="relative" // For positioning effects
                         >
                             <Image
                                 src={bbdevsLogo}
                                 alt="BBDevs Logo"
-                                w={{ base: "150px", md: "500px" }}
+                                w={{base: "150px", md: "500px"}}
                             />
                         </Box>
 
@@ -229,19 +233,19 @@ function Home() {
                         <VStack
                             flex="2"
                             spacing={6}
-                            align={{ base: "center", md: "flex-start" }} // Center on mobile, align left on larger screens
+                            align={{base: "center", md: "flex-start"}} // Center on mobile, align left on larger screens
                         >
                             <Heading
                                 as="h1"
                                 color="teal.700"
-                                fontSize={{ base: "4xl", md: "5xl" }}
+                                fontSize={{base: "4xl", md: "5xl"}}
                             >
                                 Welcome to BBDevs
                             </Heading>
 
                             <Text
                                 as="b"
-                                fontSize={{ base: "xl", md: "2xl" }}
+                                fontSize={{base: "xl", md: "2xl"}}
                                 color="gray.700"
                             >
                                 <ReactTyped
@@ -299,48 +303,48 @@ function Home() {
                             <HStack spacing={10}>
                                 {/* Mobile Development */}
                                 <VStack>
-                                    <Icon as={FaMobileAlt} w={12} h={12} color="teal.600" />
+                                    <Icon as={FaMobileAlt} w={12} h={12} color="teal.600"/>
                                     <Text>Mobile Apps</Text>
                                 </VStack>
                                 {/* Android */}
                                 <VStack>
-                                    <Icon as={FaAndroid} w={12} h={12} color="green.500" />
+                                    <Icon as={FaAndroid} w={12} h={12} color="green.500"/>
                                     <Text>Android Development</Text>
                                 </VStack>
                                 {/* Apple */}
                                 <VStack>
-                                    <Icon as={FaApple} w={12} h={12} color="gray.800" />
+                                    <Icon as={FaApple} w={12} h={12} color="gray.800"/>
                                     <Text>Apple Development</Text>
                                 </VStack>
                             </HStack>
                             <HStack spacing={10}>
                                 {/* Web Development */}
                                 <VStack>
-                                    <Icon as={FaGlobe} w={12} h={12} color="teal.600" />
+                                    <Icon as={FaGlobe} w={12} h={12} color="teal.600"/>
                                     <Text>Web Development</Text>
                                 </VStack>
                                 {/* React */}
                                 <VStack>
-                                    <Icon as={FaReact} w={12} h={12} color="blue.500" />
+                                    <Icon as={FaReact} w={12} h={12} color="blue.500"/>
                                     <Text>React</Text>
                                 </VStack>
                                 {/* Vite */}
                                 <VStack>
-                                    <Icon as={SiVite} w={12} h={12} color="purple.600" />
+                                    <Icon as={SiVite} w={12} h={12} color="purple.600"/>
                                     <Text>Vite</Text>
                                 </VStack>
                                 {/* Firebase */}
                                 <VStack>
-                                    <Icon as={SiFirebase} w={12} h={12} color="orange.400" />
+                                    <Icon as={SiFirebase} w={12} h={12} color="orange.400"/>
                                     <Text>Firebase</Text>
                                 </VStack>
                                 {/* Flutter */}
                                 <VStack>
-                                    <Icon as={SiFlutter} w={12} h={12} color="blue.400" />
+                                    <Icon as={SiFlutter} w={12} h={12} color="blue.400"/>
                                     <Text>Flutter</Text>
                                 </VStack>
                                 <VStack>
-                                    <Icon as={SiWordpress} w={12} h={12} color="black" />
+                                    <Icon as={SiWordpress} w={12} h={12} color="black"/>
                                     <Text>Wordpress</Text>
                                 </VStack>
                             </HStack>
@@ -371,7 +375,7 @@ function Home() {
                                         src={ruzawi}
                                         draggable="false"
                                         alt="Ruzawi School"
-                                        style={{ maxHeight: "100%", maxWidth: "100%" }}
+                                        style={{maxHeight: "100%", maxWidth: "100%"}}
                                     />
                                 </a>
                             </Box>
@@ -390,7 +394,7 @@ function Home() {
                                     <img
                                         src={zimgin}
                                         alt="Zimbabwe Gin"
-                                        style={{ maxHeight: "100%", maxWidth: "100%" }}
+                                        style={{maxHeight: "100%", maxWidth: "100%"}}
                                     />
                                 </a>
                             </Box>
@@ -409,7 +413,7 @@ function Home() {
                                     <img
                                         src={cranesafaris}
                                         alt="Crane Safaris"
-                                        style={{ maxHeight: "100%", maxWidth: "100%" }}
+                                        style={{maxHeight: "100%", maxWidth: "100%"}}
                                     />
                                 </a>
                             </Box>
@@ -428,7 +432,7 @@ function Home() {
                                         src={thf}
                                         draggable="false"
                                         alt="Tikki Hywood Foundation"
-                                        style={{ maxHeight: "100%", maxWidth: "100%" }}
+                                        style={{maxHeight: "100%", maxWidth: "100%"}}
                                     />
                                 </a>
                             </Box>
@@ -445,17 +449,17 @@ function Home() {
                             <VStack spacing={4}>
                                 <FormControl isRequired>
                                     <FormLabel>Name</FormLabel>
-                                    <Input type="text" name="name" onChange={handleChange} />
+                                    <Input type="text" name="name" onChange={handleChange}/>
                                 </FormControl>
 
                                 <FormControl isRequired>
                                     <FormLabel>Email</FormLabel>
-                                    <Input type="email" name="email" onChange={handleChange} />
+                                    <Input type="email" name="email" onChange={handleChange}/>
                                 </FormControl>
 
                                 <FormControl isRequired>
                                     <FormLabel>Message</FormLabel>
-                                    <Textarea name="message" onChange={handleChange} />
+                                    <Textarea name="message" onChange={handleChange}/>
                                 </FormControl>
 
                                 {/* reCAPTCHA Component */}
@@ -478,7 +482,7 @@ function Home() {
                     </Container>
                 </Box>
             </Container>
-        </>
+        </ChakraProvider>
     );
 }
 

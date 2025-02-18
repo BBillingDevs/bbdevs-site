@@ -1,31 +1,37 @@
 // App.jsx
+import React from "react";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {ChakraProvider, extendTheme} from "@chakra-ui/react";
 
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './Home'; // Import the Home component
-import PrivacyPolicy from "./components/butterflies_privacy_policy.jsx"; // Import PrivacyPolicy component
-import TermsAndConditions from "./components/butterflies_terms_and_conditions.jsx"; // Import TermsAndConditions component
+import Home from "./pages/Home"; // Your main landing page
+import Terms from "./pages/Terms"; // The new Terms component
+import Privacy from "./pages/Privacy"; // The new Privacy component
+import Eula from "./pages/Eula"; // The new EULA component
 
-// Extend Chakra UI theme to use Poppins font
 const theme = extendTheme({
-  fonts: {
-    heading: "Poppins, sans-serif", // Set for headings
-    body: "Poppins, sans-serif", // Set for body text
-  },
+    fonts: {
+        heading: "Poppins, sans-serif",
+        body: "Poppins, sans-serif",
+    },
 });
 
 function App() {
-  return (
-      <ChakraProvider theme={theme}>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-          </Routes>
-        </Router>
-      </ChakraProvider>
-  );
+    return (
+        <ChakraProvider theme={theme}>
+            <Router>
+                {/* You can still have a nav bar inside or outside your Router */}
+                {/* Example of a simple nav: */}
+
+
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/butterflies-of-zimbabwe/terms-and-conditions" element={<Terms/>}/>
+                    <Route path="/butterflies-of-zimbabwe/privacy-policy" element={<Privacy/>}/>
+                    <Route path="/butterflies-of-zimbabwe/eula" element={<Eula/>}/>
+                </Routes>
+            </Router>
+        </ChakraProvider>
+    );
 }
 
 export default App;
