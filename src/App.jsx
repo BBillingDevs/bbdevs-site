@@ -29,7 +29,7 @@ function App() {
                     <Route path="/butterflies-of-zimbabwe/terms-and-conditions" element={<Terms/>}/>
                     <Route path="/butterflies-of-zimbabwe/privacy-policy" element={<Privacy/>}/>
                     <Route path="/butterflies-of-zimbabwe/eula" element={<Eula/>}/>
-                    <Route path="/disclaimer" element={<Disclaimer/>}/>
+                    <Route path="/butterflies-of-zimbabwe/disclaimer" element={<Disclaimer/>}/>
                 </Routes>
             </Router>
         </ChakraProvider>
