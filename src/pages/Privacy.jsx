@@ -346,6 +346,9 @@ function Privacy() {
                     Contact Us
                 </Heading>
                 <Text>Don't hesitate to contact us if you have any questions.</Text>
+                <UnorderedList spacing={2}>
+                    <ListItem>Via Email: admin@bbdevs.xyz</ListItem>
+                </UnorderedList>
             </VStack>
         </Container>
     );

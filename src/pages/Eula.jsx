@@ -262,7 +262,7 @@ function Eula() {
                 </Heading>
                 <Text>Don't hesitate to contact us if you have any questions about this Agreement.</Text>
                 <UnorderedList spacing={2}>
-                    <ListItem>Via Email: [email protected]</ListItem>
+                    <ListItem>Via Email: admin@bbdevs.xyz</ListItem>
                 </UnorderedList>
             </VStack>
         </Container>
